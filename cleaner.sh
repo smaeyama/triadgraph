@@ -1,7 +1,7 @@
 #!/bin/sh
 
-find ./png/ -type f  | xargs rm -f
-find ./dot/ -type f  | xargs rm -f
+find ./png/ -name *.png  | xargs rm -f
+find ./dot/ -name *.dot  | xargs rm -f
 find . -type d -name .ipynb_checkpoints | xargs rm -rf
 find . -type d -name __pycache__ | xargs rm -rf
 

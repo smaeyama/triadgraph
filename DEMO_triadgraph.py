@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
-plt.rcParams["font.size"]=12 # Font size for matplotlib
+plt.rcParams["font.size"]=14 # Font size for matplotlib
 #plt.tight_layout()
 
 energy=np.loadtxt("./sample_data/Energy_evo.dat")
@@ -28,7 +28,7 @@ ax.set_xlabel("Time t")
 ax.set_ylabel("Energy $E_k$")
 ax.set_ylim(0,None)
 ax.set_xlim(0,None)
-ax.legend(bbox_to_anchor=(1.01,0.5), loc="center left", borderaxespad=0)
+ax.legend(bbox_to_anchor=(1.01,0.5), loc="center left", borderaxespad=0, labelspacing=0)
 plt.show()
 
 
@@ -145,7 +145,7 @@ ax.plot(np.sum(t_k,axis=0),label="sum")
 ax.set_xlabel("Time t")
 ax.set_ylabel("Net transfer $T_k$")
 ax.set_xlim(0,100)
-ax.legend(bbox_to_anchor=(1.01,0.5), loc="center left", borderaxespad=0)
+ax.legend(bbox_to_anchor=(1.01,0.5), loc="center left", borderaxespad=0, labelspacing=0)
 plt.show()
 
 ### Plot J_k^p,q for each k
@@ -166,7 +166,7 @@ for k in range(4):
     ax.set_xlabel("Time t")
     ax.set_ylabel("$J_{"+ nodename[k] + "}^{p,q}$")
     ax.set_xlim(0,100)
-    ax.legend(bbox_to_anchor=(1.01,0.5), loc="center left", borderaxespad=0)
+    ax.legend(bbox_to_anchor=(1.01,0.5), loc="center left", borderaxespad=0, labelspacing=0)
 plt.show()
 
 plt.close(fig)
@@ -217,7 +217,7 @@ triadgraph_symmetric_kpq(j_kpq[:,:,:,72],1,2,3,title="(a) symmetric triad transf
 triadgraph_directional_kpq(d_kpq[:,:,:,72],1,2,3,title="(b) directional representation of (a)",pwidth=10,nodename=nodename)
 
 triadgraph_symmetric_kpq(j_kpq[:,:,:,72],2,3,3,title="(c) symmetric triad transfer between two",pwidth=5,nodename=nodename)
-triadgraph_directional_kpq(d_kpq[:,:,:,72],2,3,3,title="(b) directional representation of (c)",pwidth=5,nodename=nodename)
+triadgraph_directional_kpq(d_kpq[:,:,:,72],2,3,3,title="(d) directional representation of (c)",pwidth=5,nodename=nodename)
 
 
 # ## 7.1 Visualization of symmetrized triad transfer $S_k^{p,q}$
@@ -291,7 +291,7 @@ ax.set_ylim(0,None)
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.67,'(a)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0)
+ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
 
 ax = fig.add_subplot(612)
 for k in range(4):
@@ -302,7 +302,7 @@ ax.set_ylabel("Net transfer $T_k$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.067,'(b)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0)
+ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
 
 screening = 0.1 * np.max(abs(j_kpq))
 k=0
@@ -322,7 +322,7 @@ ax.set_ylabel("Triad $J_{"+ nodename[k] + "}^{p,q}$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.013,'(c)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0)
+ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
 
 k=1
 ax = fig.add_subplot(612+(k+1))
@@ -341,7 +341,7 @@ ax.set_ylabel("Triad $J_{"+ nodename[k] + "}^{p,q}$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.038,'(d)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0)
+ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
 
 k=2
 ax = fig.add_subplot(612+(k+1))
@@ -360,7 +360,7 @@ ax.set_ylabel("Triad $J_{"+ nodename[k] + "}^{p,q}$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.009,'(e)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0)
+ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
 
 k=3
 ax = fig.add_subplot(612+(k+1))
@@ -379,13 +379,59 @@ ax.set_ylabel("Triad $J_{"+ nodename[k] + "}^{p,q}$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.022,'(f)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0)
+ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
 
 
 plt.xticks(color="k")
 plt.show()
 
 plt.close(fig)
+
+
+# In[ ]:
+
+
+# comparison of visivility
+triadgraph_symmetric_all(np.average(j_kpq[:,:,:,50:60],axis=3),title="t={:4d}-{:4d}".format(50,60),nodename=nodename,screening=0,energy=np.average(energy[:,i*10:(i+1)*10],axis=1))
+triadgraph_directional_all(np.average(d_kpq[:,:,:,50:60],axis=3),title="t={:4d}-{:4d}".format(50,60),nodename=nodename,screening=0,energy=np.average(energy[:,i*10:(i+1)*10],axis=1))
+
+
+# In[ ]:
+
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+surf = ax.pcolormesh(np.arange(4),np.arange(4),np.sum(np.average(d_kpq[:,:,:,50:60],axis=3),axis=1),
+                     cmap=cm.RdBu,shading="auto",vmax=0.7,vmin=-0.7)
+ax.set_xlabel("Mode k")
+ax.set_ylabel("Mode q")
+ax.set_xticks(list(np.arange(4)))
+ax.set_xticklabels(nodename)
+ax.set_yticks(list(np.arange(4)))
+ax.set_yticklabels(nodename)
+cbar = fig.colorbar(surf,aspect=5)
+cbar.set_label(r"$\sum_p D_{k \leftarrow q}^p$")
+plt.show()
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+surf = ax.pcolormesh(np.arange(4),np.arange(4),np.sum(np.average(wa_kpq[:,:,:,50:60],axis=3),axis=1),
+                     cmap=cm.RdBu,shading="auto",vmax=0.7,vmin=-0.7)
+ax.set_xlabel("Mode k")
+ax.set_ylabel("Mode q")
+ax.set_xticks(list(np.arange(4)))
+ax.set_xticklabels(nodename)
+ax.set_yticks(list(np.arange(4)))
+ax.set_yticklabels(nodename)
+cbar = fig.colorbar(surf,aspect=5)
+cbar.set_label(r"$\sum_p A_k^{q,p}$")
+plt.show()
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

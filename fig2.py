@@ -1,20 +1,22 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Fig 2 in Maeyama, NJP (2020).
-
-# In[ ]:
-
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.rcParams['figure.figsize'] = (3.14, 3.14)
-plt.rcParams['font.family'] ='sans-serif'#使用するフォント
+plt.rcParams['figure.figsize'] = (2.3,5.5) # 幅,高さ(inch)
+plt.rcParams["figure.dpi"] = 150       # dpi(dots per inch)
+
+plt.rcParams['font.size'] = 7 #フォントの大きさ
+
 plt.rcParams['xtick.direction'] = 'in'#x軸の目盛線が内向き('in')か外向き('out')か双方向か('inout')
 plt.rcParams['ytick.direction'] = 'in'#y軸の目盛線が内向き('in')か外向き('out')か双方向か('inout')
-plt.rcParams['font.size'] = 8 #フォントの大きさ
+
 plt.rcParams["legend.edgecolor"] = "k"
+
+plt.rcParams["axes.edgecolor"] = "k"
+plt.rcParams['axes.linewidth'] = 0.8
 
 
 # In[ ]:
@@ -58,30 +60,29 @@ t_k = np.sum(np.sum(j_kpq,axis=2),axis=1)
 # In[ ]:
 
 
-
-fig=plt.figure(figsize=[2,6])
+fig=plt.figure()
 
 ax = fig.add_subplot(611)
 for k in range(4):
-    ax.plot(energy[k,:],label="$E_{" + nodename[k] + "}$")
+    ax.plot(energy[k,:],label="$E_{" + nodename[k] + "}$", linewidth=0.8)
 ax.set_xlabel("Time t")
 ax.set_ylabel("Energy $E_k$")
 ax.set_ylim(0,None)
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.67,'(a)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
+ax.legend(bbox_to_anchor=(1.1,0.5), loc="center left", borderaxespad=0, labelspacing=0.2)
 
 ax = fig.add_subplot(612)
 for k in range(4):
-    ax.plot(t_k[k,:],label="$T_{" + nodename[k] + "}$")
-ax.plot(np.sum(t_k,axis=0),label="sum")
+    ax.plot(t_k[k,:],label="$T_{" + nodename[k] + "}$", linewidth=0.8)
+#ax.plot(np.sum(t_k,axis=0),label="sum")
 ax.set_xlabel("Time t")
 ax.set_ylabel("Net transfer $T_k$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.067,'(b)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
+ax.legend(bbox_to_anchor=(1.1,0.5), loc="center left", borderaxespad=0, labelspacing=0.2)
 
 screening = 0.1 * np.max(abs(j_kpq))
 k=0
@@ -91,17 +92,17 @@ for p in range(4):
         if (p!=q): # J_k^kq = J_k^qk,  J_k^pk = J_k^kp
             if np.max(abs(j_kpq[k,p,q,:])*2) > screening: # Screening for visibility
                 #ax.plot(j_kpq[k,p,q,:]*2,label="J({}|{},{})*2".format(nodename[k],nodename[p],nodename[q]))
-                ax.plot(j_kpq[k,p,q,:]*2,label="2$J_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$")
+                ax.plot(j_kpq[k,p,q,:]*2,label="2$S_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$", linewidth=0.8)
         else: # J_k^pq
             if np.max(abs(j_kpq[k,p,q,:])) > screening: # Screening for visibility
                 #ax.plot(j_kpq[k,p,q,:],label="J({}|{},{})".format(nodename[k],nodename[p],nodename[q]))
-                ax.plot(j_kpq[k,p,q,:],label="$J_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$")
+                ax.plot(j_kpq[k,p,q,:],label="$S_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$", linewidth=0.8)
 ax.set_xlabel("Time t")
-ax.set_ylabel("Triad $J_{"+ nodename[k] + "}^{p,q}$")
+ax.set_ylabel("Triad $S_{"+ nodename[k] + "}^{p,q}$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.013,'(c)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
+ax.legend(bbox_to_anchor=(1.1,0.5), loc="center left", borderaxespad=0, labelspacing=0.2)
 
 k=1
 ax = fig.add_subplot(612+(k+1))
@@ -110,17 +111,17 @@ for p in range(4):
         if (p!=q): # J_k^kq = J_k^qk,  J_k^pk = J_k^kp
             if np.max(abs(j_kpq[k,p,q,:])*2) > screening: # Screening for visibility
                 #ax.plot(j_kpq[k,p,q,:]*2,label="J({}|{},{})*2".format(nodename[k],nodename[p],nodename[q]))
-                ax.plot(j_kpq[k,p,q,:]*2,label="2$J_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$")
+                ax.plot(j_kpq[k,p,q,:]*2,label="2$S_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$", linewidth=0.8)
         else: # J_k^pq
             if np.max(abs(j_kpq[k,p,q,:])) > screening: # Screening for visibility
                 #ax.plot(j_kpq[k,p,q,:],label="J({}|{},{})".format(nodename[k],nodename[p],nodename[q]))
-                ax.plot(j_kpq[k,p,q,:],label="$J_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$")
+                ax.plot(j_kpq[k,p,q,:],label="$S_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$", linewidth=0.8)
 ax.set_xlabel("Time t")
-ax.set_ylabel("Triad $J_{"+ nodename[k] + "}^{p,q}$")
+ax.set_ylabel("Triad $S_{"+ nodename[k] + "}^{p,q}$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.038,'(d)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
+ax.legend(bbox_to_anchor=(1.1,0.5), loc="center left", borderaxespad=0, labelspacing=0.2)
 
 k=2
 ax = fig.add_subplot(612+(k+1))
@@ -129,17 +130,17 @@ for p in range(4):
         if (p!=q): # J_k^kq = J_k^qk,  J_k^pk = J_k^kp
             if np.max(abs(j_kpq[k,p,q,:])*2) > screening: # Screening for visibility
                 #ax.plot(j_kpq[k,p,q,:]*2,label="J({}|{},{})*2".format(nodename[k],nodename[p],nodename[q]))
-                ax.plot(j_kpq[k,p,q,:]*2,label="2$J_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$")
+                ax.plot(j_kpq[k,p,q,:]*2,label="2$S_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$", linewidth=0.8)
         else: # J_k^pq
             if np.max(abs(j_kpq[k,p,q,:])) > screening: # Screening for visibility
                 #ax.plot(j_kpq[k,p,q,:],label="J({}|{},{})".format(nodename[k],nodename[p],nodename[q]))
-                ax.plot(j_kpq[k,p,q,:],label="$J_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$")
+                ax.plot(j_kpq[k,p,q,:],label="$S_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$", linewidth=0.8)
 ax.set_xlabel("Time t")
-ax.set_ylabel("Triad $J_{"+ nodename[k] + "}^{p,q}$")
+ax.set_ylabel("Triad $S_{"+ nodename[k] + "}^{p,q}$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.009,'(e)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
+ax.legend(bbox_to_anchor=(1.1,0.5), loc="center left", borderaxespad=0, labelspacing=0.2)
 
 k=3
 ax = fig.add_subplot(612+(k+1))
@@ -148,25 +149,37 @@ for p in range(4):
         if (p!=q): # J_k^kq = J_k^qk,  J_k^pk = J_k^kp
             if np.max(abs(j_kpq[k,p,q,:])*2) > screening: # Screening for visibility
                 #ax.plot(j_kpq[k,p,q,:]*2,label="J({}|{},{})*2".format(nodename[k],nodename[p],nodename[q]))
-                ax.plot(j_kpq[k,p,q,:]*2,label="2$J_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$")
+                ax.plot(j_kpq[k,p,q,:]*2,label="2$S_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$", linewidth=0.8)
         else: # J_k^pq
             if np.max(abs(j_kpq[k,p,q,:])) > screening: # Screening for visibility
                 #ax.plot(j_kpq[k,p,q,:],label="J({}|{},{})".format(nodename[k],nodename[p],nodename[q]))
-                ax.plot(j_kpq[k,p,q,:],label="$J_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$")
+                ax.plot(j_kpq[k,p,q,:],label="$S_{" + nodename[k] + "}^{" + nodename[p] + "," + nodename[q] + "}$", linewidth=0.8)
 ax.set_xlabel("Time t")
-ax.set_ylabel("Triad $J_{"+ nodename[k] + "}^{p,q}$")
+ax.set_ylabel("Triad $S_{"+ nodename[k] + "}^{p,q}$")
 ax.set_xlim(0,100)
 plt.xticks(color="None")
 ax.text(2,0.022,'(f)')
-ax.legend(bbox_to_anchor=(1.03,0.5), loc="center left", borderaxespad=0, labelspacing=0)
+ax.legend(bbox_to_anchor=(1.1,0.5), loc="center left", borderaxespad=0, labelspacing=0.2)
 
 plt.xticks(color="k")
 
 
 fig.savefig("fig2.pdf", bbox_inches="tight")
-plt.show()
+#plt.show()
 
 plt.close(fig)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
