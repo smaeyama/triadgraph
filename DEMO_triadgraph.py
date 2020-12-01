@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# In[ ]:
+
+
+get_ipython().run_line_magic('load_ext', 'autoreload')
+get_ipython().run_line_magic('autoreload', '2')
+
+
 # # 1. Replot time evolution of kinetic energy, Fig 5 (a) in Sasaki, PPCF (2020).
 
 # In[ ]:
@@ -392,12 +399,14 @@ plt.close(fig)
 
 
 # comparison of visivility
-triadgraph_symmetric_all(np.average(j_kpq[:,:,:,50:60],axis=3),title="t={:4d}-{:4d}".format(50,60),nodename=nodename,screening=0,energy=np.average(energy[:,i*10:(i+1)*10],axis=1))
-triadgraph_directional_all(np.average(d_kpq[:,:,:,50:60],axis=3),title="t={:4d}-{:4d}".format(50,60),nodename=nodename,screening=0,energy=np.average(energy[:,i*10:(i+1)*10],axis=1))
+triadgraph_symmetric_all(np.average(j_kpq[:,:,:,50:60],axis=3),title="t={:4d}-{:4d}".format(50,60),nodename=nodename,screening=1e-5,energy=np.average(energy[:,i*10:(i+1)*10],axis=1))
+triadgraph_directional_all(np.average(d_kpq[:,:,:,50:60],axis=3),title="t={:4d}-{:4d}".format(50,60),nodename=nodename,screening=1e-5,energy=np.average(energy[:,i*10:(i+1)*10],axis=1))
 
 
 # In[ ]:
 
+
+contracted_dkq=np.sum
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
@@ -426,6 +435,56 @@ ax.set_yticklabels(nodename)
 cbar = fig.colorbar(surf,aspect=5)
 cbar.set_label(r"$\sum_p A_k^{q,p}$")
 plt.show()
+
+
+# # 8. Contracted mode-to-mode transfer
+# $D_{k \leftarrow q} = \sum_p D_{k \leftarrow q}^p$, which could be repraced by the mode-to-mode transfer summed over the index of the mediator $p$, often plotted in the non-symmetrized tranfer analysis.
+
+# In[ ]:
+
+
+from triadgraph import triadgraph_mode2mode_all
+
+contracted_d_kq=np.sum(d_kpq[:,:,:,:],axis=1) # d_kpq[k,p,q,time]
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+surf = ax.pcolormesh(np.arange(4),np.arange(4),np.average(contracted_d_kq[:,:,50:60],axis=2),
+                     cmap=cm.RdBu,shading="auto",vmax=0.7,vmin=-0.7)
+ax.set_xlabel("Mode k")
+ax.set_ylabel("Mode q")
+ax.set_xticks(list(np.arange(4)))
+ax.set_xticklabels(nodename)
+ax.set_yticks(list(np.arange(4)))
+ax.set_yticklabels(nodename)
+ax.set_aspect('equal', adjustable='box')
+cbar = fig.colorbar(surf,aspect=5)
+cbar.set_label(r"$D_{k \leftarrow q}=\sum_p D_{k \leftarrow q}^p$")
+plt.show()
+
+triadgraph_mode2mode_all(np.average(contracted_d_kq[:,:,50:60],axis=2),title="t=50-60",screening=0.1,nodename=nodename,energy=np.average(energy[:,50:60],axis=1))
+
+
+
+contracted_wa_kq=np.sum(wa_kpq[:,:,:,:],axis=1) # wa_kpq[k,p,q,time]
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+surf = ax.pcolormesh(np.arange(4),np.arange(4),np.average(contracted_wa_kq[:,:,50:60],axis=2),
+                     cmap=cm.RdBu,shading="auto",vmax=0.7,vmin=-0.7)
+ax.set_xlabel("Mode k")
+ax.set_ylabel("Mode q")
+ax.set_xticks(list(np.arange(4)))
+ax.set_xticklabels(nodename)
+ax.set_yticks(list(np.arange(4)))
+ax.set_yticklabels(nodename)
+ax.set_aspect('equal', adjustable='box')
+cbar = fig.colorbar(surf,aspect=5)
+cbar.set_label(r"$A_k^q=\sum_p A_k^{q,p}$")
+plt.show()
+
+
+triadgraph_mode2mode_all(np.average(contracted_wa_kq[:,:,50:60],axis=2),title="t=50-60",screening=0.1,nodename=nodename,energy=np.average(energy[:,50:60],axis=1))
 
 
 # In[ ]:

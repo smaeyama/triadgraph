@@ -68,7 +68,7 @@ ax.set_yticklabels(nodename)
 ax.text(-0.4,3.15,'(a)')
 ax.set_aspect('equal', adjustable='box')
 cbar = fig.colorbar(surf,aspect=5)
-cbar.set_label(r"$\sum_p D_{k \leftarrow q}^p$")
+cbar.set_label(r"$D_{k \leftarrow q} = \sum_p D_{k \leftarrow q}^p$")
 
 ax = fig.add_subplot(212)
 surf = ax.pcolormesh(np.arange(4),np.arange(4),np.sum(np.average(wa_kpq[:,:,:,50:60],axis=3),axis=1),
@@ -82,7 +82,7 @@ ax.set_yticklabels(nodename)
 ax.text(-0.4,3.15,'(b)')
 ax.set_aspect('equal', adjustable='box')
 cbar = fig.colorbar(surf,aspect=5)
-cbar.set_label(r"$\sum_p A_k^{q,p}$")
+cbar.set_label(r"$A_k^q = \sum_p A_k^{q,p}$")
 
 
 # In[ ]:
