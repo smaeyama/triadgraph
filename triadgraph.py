@@ -21,7 +21,7 @@ import pygraphviz as pgv
 from IPython.display import display, SVG
 
 
-# Plot symmetric triad transfer J_k^pq
+# Plot symmetric triad transfer S_k^pq
 def triadgraph_symmetric_kernel(G,trans,k,p,q,screening,pwidth,nodename):
     """
     Draw network of symmetric triad transfer
@@ -31,32 +31,32 @@ def triadgraph_symmetric_kernel(G,trans,k,p,q,screening,pwidth,nodename):
     G : AGraph of pygraphviz
         G = pygraphviz.AGraph(directed=True,strict=False)
     trans : Numpy array
-        The symmetric triad transfer function J_k^pq
+        The symmetric triad transfer function S_k^pq
         Its shape is (n,n,n) where n is the number of modes.
         Its amplitude should be normalized to draw a graph.
     k : int
-        index of J_k^pq
+        index of S_k^pq
     p : int
-        index of J_k^pq
+        index of S_k^pq
     q : int
-        index of J_k^pq
+        index of S_k^pq
     screening : float
-        For visibility, draw edges only for |J_k^pq| > screening.
+        For visibility, draw edges only for |S_k^pq| > screening.
     pwidth : float
-        Penwidth for drawing edges, penwidth=pwidth*|J_k^pq|.
+        Penwidth for drawing edges, penwidth=pwidth*|S_k^pq|.
     nodename : list
         List of node name, len(nodename) = n where n is the number of modes.
     
     Returns
     -------
     G : AGraph of pygraphviz
-        Nodes and edges are added, representing J_k^pq + J_p^qk + J_q^kp = 0
+        Nodes and edges are added, representing S_k^pq + S_p^qk + S_q^kp = 0
     """
     kpq_junction = "{},{},{}".format(nodename[k],nodename[p],nodename[q])
     wj = np.array([trans[k,p,q], trans[p,q,k], trans[q,k,p]])
-    if (k==p and p==q):          # J_k^kk = 0
+    if (k==p and p==q):          # S_k^kk = 0
         pass
-    elif (p==q):                 # J_k^pp = - 2*J_p^kp
+    elif (p==q):                 # S_k^pp = - 2*S_p^kp
         if np.abs(wj[0]) > screening: # Screening for visibility
             if wj[0] < 0:
                 G.add_edge(nodename[k],kpq_junction,penwidth=pwidth*abs(wj[0]))
@@ -64,7 +64,7 @@ def triadgraph_symmetric_kernel(G,trans,k,p,q,screening,pwidth,nodename):
             else:
                 G.add_edge(kpq_junction,nodename[k],penwidth=pwidth*abs(wj[0]))
                 G.add_edge(nodename[p],kpq_junction,penwidth=pwidth*abs(wj[0]))
-    elif (q==k):                 # J_p^kk + 2*J_k^kp = 0
+    elif (q==k):                 # S_p^kk + 2*S_k^kp = 0
         if np.abs(wj[1]) > screening: # Screening for visibility
             if wj[1] < 0:
                 G.add_edge(nodename[p],kpq_junction,penwidth=pwidth*abs(wj[1]))
@@ -72,7 +72,7 @@ def triadgraph_symmetric_kernel(G,trans,k,p,q,screening,pwidth,nodename):
             else:
                 G.add_edge(kpq_junction,nodename[p],penwidth=pwidth*abs(wj[1]))
                 G.add_edge(nodename[k],kpq_junction,penwidth=pwidth*abs(wj[1]))
-    elif (k==p):                 # J_q^kk + 2*J_k^kq = 0
+    elif (k==p):                 # S_q^kk + 2*S_k^kq = 0
         if np.abs(wj[2]) > screening: # Screening for visibility
             if wj[2] < 0:
                 G.add_edge(nodename[q],kpq_junction,penwidth=pwidth*abs(wj[2]))
@@ -80,7 +80,7 @@ def triadgraph_symmetric_kernel(G,trans,k,p,q,screening,pwidth,nodename):
             else:
                 G.add_edge(kpq_junction,nodename[q],penwidth=pwidth*abs(wj[2]))
                 G.add_edge(nodename[k],kpq_junction,penwidth=pwidth*abs(wj[2]))
-    else:                        # J_k^pq + J_p^qk + J_q^kp = 0
+    else:                        # S_k^pq + S_p^qk + S_q^kp = 0
         if np.abs(2*wj[0]) > screening: # Screening for visibility
             if wj[0] < 0:
                 G.add_edge(nodename[k],kpq_junction,penwidth=pwidth*abs(2*wj[0]))
@@ -108,7 +108,7 @@ def triadgraph_symmetric_all(trans,output=None,title=None,screening=0.1,pwidth=5
     Parameters
     ----------
     trans : Numpy array
-        The symmetric triad transfer function J_k^pq
+        The symmetric triad transfer function S_k^pq
         Its shape is (n,n,n) where n is the number of modes.
         Its amplitude should be normalized to draw a graph.
     output : str
@@ -119,10 +119,10 @@ def triadgraph_symmetric_all(trans,output=None,title=None,screening=0.1,pwidth=5
     title : str, optional
         Title of graph
     screening : float, optional
-        For visibility, draw edges only for |J_k^pq| > screening.
+        For visibility, draw edges only for |S_k^pq| > screening.
         Default: screening=0.1
     pwidth : float, optional
-        Penwidth for drawing edges, penwidth=pwidth*|J_k^pq|.
+        Penwidth for drawing edges, penwidth=pwidth*|S_k^pq|.
         Default: pwidth=5.0
     nodename : list, optional
         List of node name, len(nodename) = n where n is the number of modes.
@@ -175,15 +175,15 @@ def triadgraph_symmetric_kpq(trans,k_in,p_in,q_in,output=None,title=None,screeni
     Parameters
     ----------
     trans : Numpy array
-        The symmetric triad transfer function J_k^pq
+        The symmetric triad transfer function S_k^pq
         Its shape is (n,n,n) where n is the number of modes.
         Its amplitude should be normalized to draw a graph.
     k_in : int
-        index of J_k^pq
+        index of S_k^pq
     p_in : int
-        index of J_k^pq
+        index of S_k^pq
     q_in : int
-        index of J_k^pq
+        index of S_k^pq
     output : str
         If output == None:
             show a network graph on display.
@@ -192,10 +192,10 @@ def triadgraph_symmetric_kpq(trans,k_in,p_in,q_in,output=None,title=None,screeni
     title : str, optional
         Title of graph
     screening : float, optional
-        For visibility, draw edges only for |J_k^pq| > screening.
+        For visibility, draw edges only for |S_k^pq| > screening.
         Default: screening=0.1
     pwidth : float, optional
-        Penwidth for drawing edges, penwidth=pwidth*|J_k^pq|.
+        Penwidth for drawing edges, penwidth=pwidth*|S_k^pq|.
         Default: pwidth=5.0
     nodename : list, optional
         List of node name, len(nodename) = n where n is the number of modes.
@@ -259,9 +259,9 @@ def triadgraph_directional_kernel(G,trans,k,p,q,screening,pwidth,nodename):
     q : int
         index of D_{k<-q}^p
     screening : float
-        For visibility, draw edges only for |J_k^pq| > screening.
+        For visibility, draw edges only for |S_k^pq| > screening.
     pwidth : float
-        Penwidth for drawing edges, penwidth=pwidth*|J_k^pq|.
+        Penwidth for drawing edges, penwidth=pwidth*|S_k^pq|.
     nodename : list
         List of node name, len(nodename) = n where n is the number of modes.
     
@@ -336,10 +336,10 @@ def triadgraph_directional_all(trans,output=None,title=None,screening=0.1,pwidth
     title : str, optional
         Title of graph
     screening : float, optional
-        For visibility, draw edges only for |J_k^pq| > screening.
+        For visibility, draw edges only for |S_k^pq| > screening.
         Default: screening=0.1
     pwidth : float, optional
-        Penwidth for drawing edges, penwidth=pwidth*|J_k^pq|.
+        Penwidth for drawing edges, penwidth=pwidth*|S_k^pq|.
         Default: pwidth=5.0
     nodename : list
         List of node name, len(nodename) = n where n is the number of modes.
@@ -410,10 +410,10 @@ def triadgraph_directional_kpq(trans,k_in,p_in,q_in,output=None,title=None,scree
     title : str, optional
         Title of graph
     screening : float, optional
-        For visibility, draw edges only for |J_k^pq| > screening.
+        For visibility, draw edges only for |S_k^pq| > screening.
         Default: screening=0.1
     pwidth : float, optional
-        Penwidth for drawing edges, penwidth=pwidth*|J_k^pq|.
+        Penwidth for drawing edges, penwidth=pwidth*|S_k^pq|.
         Default: pwidth=5.0
     nodename : list
         List of node name, len(nodename) = n where n is the number of modes.
@@ -593,13 +593,13 @@ def convert_energy2color(energy):
 
 
 
-# Calculate symmetric triad transfer J_k^pq
+# Calculate symmetric triad transfer S_k^pq
 def symmetrize_triadtransfer(trans,time_axis=3):
     """
-    Symmetrize triad transfer, J_k^pq = J_k^qp
+    Symmetrize triad transfer, S_k^pq = S_k^qp
     
     From assymetric transfer A_k^pq,
-        J_k^pq = 0.5 * (A_k^pq + A_k^qp)
+        S_k^pq = 0.5 * (A_k^pq + A_k^qp)
     
     Parameters
     ----------
@@ -616,14 +616,14 @@ def symmetrize_triadtransfer(trans,time_axis=3):
     Returns
     -------
     symmetric_trans : Numpy array
-        Symmetric triad transfer function J_k^pq
+        Symmetric triad transfer function S_k^pq
         
     Theory
     ------
     * Symmetry
-        J_k^pq = J_k^qp
+        S_k^pq = S_k^qp
     * Detailed balance (conservation law among triad)
-        J_k^pq + J_p^qk + J_q^kp = 0
+        S_k^pq + S_p^qk + S_q^kp = 0
     """
     if (time_axis==0):
         symmetric_trans = 0.5 * (trans + np.transpose(trans,axes=(0,1,3,2))) # axes=(2,3) are (p,q)
@@ -636,7 +636,7 @@ def symmetrize_triadtransfer(trans,time_axis=3):
 
 
 
-# Calculate directional representation D_{k<-q}^p (from symmetric triad transfer J_k^pq) 
+# Calculate directional representation D_{k<-q}^p (from symmetric triad transfer S_k^pq) 
 def directional_triadtransfer(symmetric_trans,time_axis=3):
     """
     Directional representation of symmetric triad transfer, D_{k<-q}^p
@@ -646,7 +646,7 @@ def directional_triadtransfer(symmetric_trans,time_axis=3):
     Parameters
     ----------
     symmetric_trans : Numpy array
-        Symetric triad transfer function J_k^pq
+        Symetric triad transfer function S_k^pq
         Its shape is,
             (ntime,nk,np,nq) when time_axis=0
             (nk,np,nq,ntime) when time_axis=3
@@ -662,24 +662,24 @@ def directional_triadtransfer(symmetric_trans,time_axis=3):
     
     Theory
     ------
-    Because of detailed balance of symmetric triad transfer, J_k^pq + J_p^qk + J_q^kp = 0,
+    Because of detailed balance of symmetric triad transfer, S_k^pq + S_p^qk + S_q^kp = 0,
     the interactions among (k,p,q) are always 2 giver(+) - 1 taker(-) or 1 giver(+) - 2 taker(-).
     
     The directional representation splits the symmetric triad transfer according to 
-    the rule of "No simultanous income/outgo", or equivalently, 
+    the rule of "No simultanous gain/loss", or equivalently, 
     "Giver should give, taker should take", or "Minimize |D_{k<-q}^p|+|D_p^qk|+|D_q^kp|".
     
-    * No simulaneous income/outgo rule
-        If sign(J_k^pq) == sign(J_q^kp), which means both k and p are givers (or takers), then set
+    * No simulaneous gain/loss rule
+        If sign(S_k^pq) == sign(S_q^kp), which means both k and p are givers (or takers), then set
         D_{k<-q}^p = 0
 
     * Conservation law between two (k,q) via a mediator (p)
         D_{k<-q}^p = - D_{q<-k}^p
         
     * Relation with symmetric triad transfer
-        J_k^pq = 0.5 * (D_{k<-q}^p + D_{k<-p}^q)
-        J_p^qk = 0.5 * (D_{p<-k}^q + D_{p<-q}^k)
-        J_q^kp = 0.5 * (D_{q<-p}^k + D_{q<-k}^p)
+        S_k^pq = 0.5 * (D_{k<-q}^p + D_{k<-p}^q)
+        S_p^qk = 0.5 * (D_{p<-k}^q + D_{p<-q}^k)
+        S_q^kp = 0.5 * (D_{q<-p}^k + D_{q<-k}^p)
     """
     n=symmetric_trans.shape[1]
     if (time_axis==0):
@@ -700,9 +700,9 @@ def directional_triadtransfer(symmetric_trans,time_axis=3):
             for p in range(k,n):
                 for q in range(p,n):
                     wj = np.array([wtr[k,p,q], wtr[p,q,k], wtr[q,k,p]])
-                    if (k==p and p==q):          # J_k^kk = 0
+                    if (k==p and p==q):          # S_k^kk = 0
                         wditr[k,p,q] = 0.0
-                    elif (k==p or p==q or q==k): # J_k^pp = - 2*J_p^kp
+                    elif (k==p or p==q or q==k): # S_k^pp = - 2*S_p^kp
                         if (np.prod(wj) > 0):    ## 2 giver(-) 1 taker(+)
                             arg=np.argmax(wj)
                             if arg==0:           ### k is the taker, p=q is giver
@@ -731,7 +731,7 @@ def directional_triadtransfer(symmetric_trans,time_axis=3):
                             wditr[wt,wg,wt] = 0.0           # Taker should only take.
                             wditr[wt,wt,wg] = 2*wtr[wt,wt,wg] # taker -> giver (negative value)
                             wditr[wg,wt,wt] = - wditr[wt,wt,wg]
-                    else:                        # J_k^pq + J_p^qk + J_q^kp = 0
+                    else:                        # S_k^pq + S_p^qk + S_q^kp = 0
                         if (np.prod(wj) > 0):    ## 2 giver(-) 1 taker(+)
                             arg=np.argmax(wj)
                             if arg==0:           ### k is the taker, p,q are givers
