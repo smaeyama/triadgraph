@@ -5,8 +5,8 @@
 # This is source code of triad transfer analysis in Ref. [1]. The sample data is used from plasma turbulence simulation in Ref. [2]
 # 
 # ### References  
-# [1] S. Maeyama et al, (2021).  
-# [2] M. Sasaki et al, PPCF (2020).
+# [1] S. Maeyama, M. Sasaki, K. Fujii, T. Kobayashi, R. O. Dendy, Y. Kawachi, H. Arakawa, S. Inagaki, New J. Phys., in press (2021).  
+# [2] M. Sasaki, T. Kobayashi, R. O. Dendy, Y. Kawachi, H. Arakawa, S. Inagaki, Plasma Phys. Control. Fusion 63, 025004 (2020).
 
 # In[ ]:
 
@@ -314,9 +314,9 @@ contracted_d_kq=np.sum(D_kpq[:,:,:,:],axis=2) # D_kpq[time,k,p,q]
 fig = plt.figure()
 ax = fig.add_subplot(111)
 surf = ax.pcolormesh(np.arange(4),np.arange(4),np.average(contracted_d_kq[50:60,:,:],axis=0),
-                     cmap="RdBu",shading="auto",vmax=0.7,vmin=-0.7)
-ax.set_xlabel("Mode k")
-ax.set_ylabel("Mode q")
+                     cmap="RdBu_r",shading="auto",vmax=0.7,vmin=-0.7)
+ax.set_xlabel("Mode q")
+ax.set_ylabel("Mode k")
 ax.set_xticks(list(np.arange(4)))
 ax.set_xticklabels(nodename)
 ax.set_yticks(list(np.arange(4)))
@@ -335,16 +335,16 @@ contracted_A_kq=np.sum(temp_A_kpq[:,:,:,:],axis=2) # temp_A_kpq[time,k,p,q], and
 fig = plt.figure()
 ax = fig.add_subplot(111)
 surf = ax.pcolormesh(np.arange(4),np.arange(4),np.average(contracted_A_kq[50:60,:,:],axis=0),
-                     cmap="RdBu",shading="auto",vmax=0.7,vmin=-0.7)
-ax.set_xlabel("Mode k")
-ax.set_ylabel("Mode q")
+                     cmap="RdBu_r",shading="auto",vmax=0.7,vmin=-0.7)
+ax.set_xlabel("Mode q")
+ax.set_ylabel("Mode k")
 ax.set_xticks(list(np.arange(4)))
 ax.set_xticklabels(nodename)
 ax.set_yticks(list(np.arange(4)))
 ax.set_yticklabels(nodename)
 ax.set_aspect('equal', adjustable='box')
 cbar = fig.colorbar(surf,aspect=5)
-cbar.set_label(r"$A_k^q=\sum_p A_k^{q,p}$")
+cbar.set_label(r"$A_{k \leftarrow q}=\sum_p A_k^{q,p}$")
 plt.show()
 
 triadgraph_mode2mode_all(np.average(contracted_A_kq[50:60,:,:],axis=0),title="t=50-60",screening=0.01,nodename=nodename,energy=np.average(energy[50:60,:],axis=0))
