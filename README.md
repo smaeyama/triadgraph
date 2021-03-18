@@ -19,7 +19,7 @@ from triadgraph import symmetrize_triadtransfer, directional_triadtransfer, \
 ```
 - ***symmetrize_triadtransfer*** returns the symmetrized triad transfer function <img src="https://latex.codecogs.com/gif.latex?S_k^{p,q}" /> from the non-symmetric triad transfer function <img src="https://latex.codecogs.com/gif.latex?A_k^{p,q}" /> .
 ```
-S_kpq = symmetrized_triadtransfer(A_kpq, time_axis=0)
+S_kpq = symmetrize_triadtransfer(A_kpq, time_axis=0)
 ```
 where S_kpq\[time,k,p,q\] and A_kpq\[time,k,p,q\] are 4D arrays.
 - ***directional_triadtransfer*** returns the directional representation <img src="https://latex.codecogs.com/gif.latex?D_{k&space;\leftarrow&space;q}^p" title="D_{k \leftarrow q}^p" /> from the symmetrized triad transfer function.
