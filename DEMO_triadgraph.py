@@ -5,8 +5,8 @@
 # This is source code of triad transfer analysis in Ref. [1]. The sample data is used from plasma turbulence simulation in Ref. [2]
 # 
 # ### References  
-# [1] S. Maeyama, M. Sasaki, K. Fujii, T. Kobayashi, R. O. Dendy, Y. Kawachi, H. Arakawa, S. Inagaki, New J. Phys., in press (2021).  
-# [2] M. Sasaki, T. Kobayashi, R. O. Dendy, Y. Kawachi, H. Arakawa, S. Inagaki, Plasma Phys. Control. Fusion 63, 025004 (2020).
+# [1] S. Maeyama, M. Sasaki, K. Fujii, T. Kobayashi, R. O. Dendy, Y. Kawachi, H. Arakawa, S. Inagaki, New J. Phys., in press (2021). [doi:10.1088/1367-2630/abeffc](https://doi.org/10.1088/1367-2630/abeffc)   
+# [2] M. Sasaki, T. Kobayashi, R. O. Dendy, Y. Kawachi, H. Arakawa, S. Inagaki, Plasma Phys. Control. Fusion 63, 025004 (2020).  
 
 # In[ ]:
 
@@ -348,16 +348,4 @@ cbar.set_label(r"$A_{k \leftarrow q}=\sum_p A_k^{q,p}$")
 plt.show()
 
 triadgraph_mode2mode_all(np.average(contracted_A_kq[50:60,:,:],axis=0),title="t=50-60",screening=0.01,nodename=nodename,energy=np.average(energy[50:60,:],axis=0))
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
