@@ -132,11 +132,11 @@ def triadgraph_symmetric_all(trans,output=None,title=None,screening=0.1,pwidth=5
         Its amplitude should be normalized to draw a graph.
     """
     n = trans.shape[0]
-    if title==None:
+    if title is None:
         G = pgv.AGraph(directed=True,strict=False)
     else:
         G = pgv.AGraph(directed=True,strict=False,label=title)
-    if nodename==None:
+    if nodename is None:
         nodename = list(range(n))
 
     # add nodes (Radial layout, color by energy)
@@ -156,7 +156,7 @@ def triadgraph_symmetric_all(trans,output=None,title=None,screening=0.1,pwidth=5
                 triadgraph_symmetric_kernel(G,trans,k,p,q,screening,pwidth,nodename)
 
     # draw network
-    if output==None:
+    if output is None:
         img = G.draw(prog="fdp", format="svg")#prog=neato|dot|twopi|circo|fdp|nop.
         display(SVG(img))
     elif output[-3:]=="png":
@@ -205,11 +205,11 @@ def triadgraph_symmetric_kpq(trans,k_in,p_in,q_in,output=None,title=None,screeni
         Its amplitude should be normalized to draw a graph.
     """
     n = trans.shape[0]
-    if title==None:
+    if title is None:
         G = pgv.AGraph(directed=True,strict=False)
     else:
         G = pgv.AGraph(directed=True,strict=False,label=title)
-    if nodename==None:
+    if nodename is None:
         nodename = list(range(n))
         
     # add nodes (Radial layout, color by energy)
@@ -226,7 +226,7 @@ def triadgraph_symmetric_kpq(trans,k_in,p_in,q_in,output=None,title=None,screeni
     triadgraph_symmetric_kernel(G,trans,k_in,p_in,q_in,screening,pwidth,nodename)
 
     # draw network
-    if output==None:
+    if output is None:
         img = G.draw(prog="fdp", format="svg")#prog=neato|dot|twopi|circo|fdp|nop.
         display(SVG(img))
     elif output[-3:]=="png":
@@ -349,11 +349,11 @@ def triadgraph_directional_all(trans,output=None,title=None,screening=0.1,pwidth
         Its amplitude should be normalized to draw a graph.
     """
     n = trans.shape[0]
-    if title==None:
+    if title is None:
         G = pgv.AGraph(directed=True,strict=False)
     else:
         G = pgv.AGraph(directed=True,strict=False,label=title)
-    if nodename==None:
+    if nodename is None:
         nodename = list(range(n))
 
     # add nodes (Radial layout, color by energy)
@@ -373,7 +373,7 @@ def triadgraph_directional_all(trans,output=None,title=None,screening=0.1,pwidth
                 triadgraph_directional_kernel(G,trans,k,p,q,screening,pwidth,nodename)
 
     # draw network
-    if output==None:
+    if output is None:
         img = G.draw(prog="fdp", format="svg")#prog=neato|dot|twopi|circo|fdp|nop.
         display(SVG(img))
     elif output[-3:]=="png":
@@ -423,11 +423,11 @@ def triadgraph_directional_kpq(trans,k_in,p_in,q_in,output=None,title=None,scree
         Its amplitude should be normalized to draw a graph.
     """
     n = trans.shape[0]
-    if title==None:
+    if title is None:
         G = pgv.AGraph(directed=True,strict=False)
     else:
         G = pgv.AGraph(directed=True,strict=False,label=title)
-    if nodename==None:
+    if nodename is None:
         nodename = list(range(n))
 
     # add nodes (Radial layout, color by energy)
@@ -444,7 +444,7 @@ def triadgraph_directional_kpq(trans,k_in,p_in,q_in,output=None,title=None,scree
     triadgraph_directional_kernel(G,trans,k_in,p_in,q_in,screening,pwidth,nodename)
 
     # draw network
-    if output==None:
+    if output is None:
         img = G.draw(prog="fdp", format="svg")#prog=neato|dot|twopi|circo|fdp|nop.
         display(SVG(img))
     elif output[-3:]=="png":
@@ -532,11 +532,11 @@ def triadgraph_mode2mode_all(mode2mode,output=None,title=None,screening=0.1,pwid
         Its amplitude should be normalized to draw a graph.
     """
     n = mode2mode.shape[0]
-    if title==None:
+    if title is None:
         G = pgv.AGraph(directed=True,strict=False)
     else:
         G = pgv.AGraph(directed=True,strict=False,label=title)
-    if nodename==None:
+    if nodename is None:
         nodename = list(range(n))
 
     # add nodes (Radial layout, color by energy)
@@ -555,7 +555,7 @@ def triadgraph_mode2mode_all(mode2mode,output=None,title=None,screening=0.1,pwid
             triadgraph_mode2mode_kernel(G,mode2mode,k,q,screening,pwidth,nodename)
 
     # draw network
-    if output==None:
+    if output is None:
         img = G.draw(prog="fdp", format="svg")#prog=neato|dot|twopi|circo|fdp|nop.
         display(SVG(img))
     elif output[-3:]=="png":
