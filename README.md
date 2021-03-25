@@ -46,3 +46,4 @@ For more details, see help of each functions and example of usage in DEMO_triadg
 \[1\] S. Maeyama, M. Sasaki, K. Fujii, T. Kobayashi, R. O. Dendy, Y. Kawachi, H. Arakawa, S. Inagaki,
 "On the triad transfer analysis of plasma turbulence: symmetrization, coarse-graining, and directional representation",
 New J. Phys., in press (2021).
+[![doi](https://img.shields.io/badge/doi-10.1088/1367-2630/abeffc-5077AB.svg)](https://doi.org/10.1088/1367-2630/abeffc)
