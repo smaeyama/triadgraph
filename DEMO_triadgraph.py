@@ -15,7 +15,7 @@
 # %autoreload 2
 import numpy as np
 import matplotlib.pyplot as plt
-from triadgraph import symmetrize_triadtransfer, directional_triadtransfer,                        triadgraph_symmetric_kpq, triadgraph_symmetric_all,                        triadgraph_directional_kpq, triadgraph_directional_all,                        triadgraph_mode2mode_all
+from triadgraph import symmetrize_triadtransfer, directional_triadtransfer,                        triadgraph_symmetric_all, triadgraph_directional_all,                        triadgraph_mode2mode_all
 help(symmetrize_triadtransfer); print("########")
 help(directional_triadtransfer); print("########")
 help(triadgraph_symmetric_all); print("########")
@@ -348,4 +348,10 @@ cbar.set_label(r"$A_{k \leftarrow q}=\sum_p A_k^{q,p}$")
 plt.show()
 
 triadgraph_mode2mode_all(np.average(contracted_A_kq[50:60,:,:],axis=0),title="t=50-60",screening=0.01,nodename=nodename,energy=np.average(energy[50:60,:],axis=0))
+
+
+# In[ ]:
+
+
+
 
