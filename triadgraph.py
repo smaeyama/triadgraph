@@ -4,16 +4,19 @@ Draw network of symmetric triad transfer
 
 Functions
 ---------
-triadgraph_symmetric_kernel
-triadgraph_symmetric_kpq
+(Public use)
 triadgraph_symmetric_all
-triadgraph_directional_kernel
-triadgraph_directional_kpq
+triadgraph_symmetric_kpq
 triadgraph_directional_all
-triadgraph_mode2mode_contracted
-convert_energy2color
+triadgraph_directional_kpq
+triadgraph_mode2mode_all
 symmetrize_triadtransfer
 directional_triadtransfer
+(Private use)
+triadgraph_symmetric_kernel
+triadgraph_directional_kernel
+triadgraph_mode2mode_kernel
+convert_energy2color
 """
 import numpy as np
 import matplotlib.pyplot as plt
