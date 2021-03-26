@@ -1,5 +1,6 @@
 # triadgraph
-Python script for the analysis of energy transfer via triad interactions
+Python script for the analysis of energy transfer via triad interactions (triadgraph.py)  
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/smaeyama/triadgraph.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/smaeyama/triadgraph/context:python)
 
 ## Overview
 Energy transfer via quadratic nonlinearity is described by triad interactions.  
