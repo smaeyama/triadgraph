@@ -44,7 +44,7 @@ draws a network graph of the directional representation at t=0.
 For more details, see help of each functions and example of usage in DEMO_triadgraph.ipynb.
 
 ## Reference
-\[1\] S. Maeyama, M. Sasaki, K. Fujii, T. Kobayashi, R. O. Dendy, Y. Kawachi, H. Arakawa, S. Inagaki,
+[S. Maeyama, M. Sasaki, K. Fujii, T. Kobayashi, R. O. Dendy, Y. Kawachi, H. Arakawa, S. Inagaki,
 "On the triad transfer analysis of plasma turbulence: symmetrization, coarse-graining, and directional representation",
-New J. Phys., in press (2021).  
+New J. Phys. 23, 043049 (2021).](https://doi.org/10.1088/1367-2630/abeffc)
 [![doi](https://img.shields.io/badge/doi-10.1088/1367--2630/abeffc-5077AB.svg)](https://doi.org/10.1088/1367-2630/abeffc)
